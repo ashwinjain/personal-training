@@ -8,7 +8,9 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { View, Text } from "react-native";
 import "react-native-reanimated";
+import styles from "./layout-styles";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -46,12 +48,22 @@ export default function RootLayout() {
 
   return <RootLayoutNav />;
 }
+function Header() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Hi, Ashwin!</Text>
+    </View>
+  );
+}
 
 function RootLayoutNav() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(tabs)"
+          options={{ headerTitle: (props) => <Header />, headerShown: true }}
+        />
       </Stack>
     </ThemeProvider>
   );
