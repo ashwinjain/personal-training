@@ -62,7 +62,11 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen
           name="(tabs)"
-          options={{ headerTitle: (props) => <Header />, headerShown: true }}
+          options={{
+            headerTitle: (props) => <Header />,
+            headerShown: true,
+            header: () => <Header />,
+          }}
         />
       </Stack>
     </ThemeProvider>

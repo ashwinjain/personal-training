@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   text: {
+    paddingTop: "20%",
+    paddingBottom: "5%",
+    paddingLeft: "5%",
     color: COLORS.primary,
     fontSize: 28,
     fontWeight: "bold",
