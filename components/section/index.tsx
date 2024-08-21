@@ -3,18 +3,22 @@ import Dumbell from "@/assets/images/dumbell.jsx";
 import styles from "./styles";
 import { ReactElement } from "react";
 import PreviousWorkout from "./previous-workout";
+import Progress from "./progress";
 
 type SectionProps = {
   title: string;
   icon?: ReactElement;
 };
 
-function calculateHeight(title: string) {
-  return title == "previous workout" ? "30%" : "60%";
+function isWorkout(title: string) {
+  return title == "previous workout";
 }
 export default function Section({ title, icon }: SectionProps) {
+  const isPreviousWorkout = title == "previous workout";
   return (
-    <View style={[styles.container, { height: calculateHeight(title) }]}>
+    <View
+      style={[styles.container, { height: isPreviousWorkout ? "35%" : "55%" }]}
+    >
       <View style={styles.sectionHeader}>
         {icon}
         <Text style={styles.title}>{title}</Text>
@@ -25,7 +29,7 @@ export default function Section({ title, icon }: SectionProps) {
           <Text style={styles.buttonText}>View More</Text>
         </Pressable>
       </View>
-      <PreviousWorkout />
+      {isPreviousWorkout ? <PreviousWorkout /> : <Progress />}
     </View>
   );
 }
