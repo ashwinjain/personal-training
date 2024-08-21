@@ -1,14 +1,10 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 import "react-native-reanimated";
 import styles from "./layout-styles";
 
@@ -63,8 +59,6 @@ function RootLayoutNav() {
         <Stack.Screen
           name="(tabs)"
           options={{
-            headerTitle: (props) => <Header />,
-            headerShown: true,
             header: () => <Header />,
           }}
         />
