@@ -2,6 +2,7 @@ import { View, Text, Button, Pressable } from "react-native";
 import Dumbell from "@/assets/images/dumbell.jsx";
 import styles from "./styles";
 import { ReactElement } from "react";
+import PreviousWorkout from "./previous-workout";
 
 type SectionProps = {
   title: string;
@@ -24,6 +25,7 @@ export default function Section({ title, icon }: SectionProps) {
           <Text style={styles.buttonText}>View More</Text>
         </Pressable>
       </View>
+      <PreviousWorkout />
     </View>
   );
 }
