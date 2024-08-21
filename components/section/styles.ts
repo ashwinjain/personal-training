@@ -15,7 +15,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 3,
   },
-  title: { fontSize: 16, fontWeight: "200", textTransform: "uppercase" },
+  title: {
+    fontSize: 14,
+    fontWeight: "200",
+    textTransform: "uppercase",
+    fontFamily: "Commissioner",
+  },
   sectionHeader: {
     padding: "4%",
     gap: 10,
@@ -36,6 +41,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 10,
     fontWeight: "300",
+    fontFamily: "Commissioner",
   },
 });
 
