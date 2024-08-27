@@ -2,7 +2,7 @@ import Dumbell from "@/assets/images/dumbell";
 import Chart from "@/assets/images/chart";
 import Section from "@/components/section";
 import { StyleSheet, View, Text, Pressable, TextInput } from "react-native";
-import styles from "../styles";
+import styles from "./styles";
 import { useState } from "react";
 import Set from "@/components/log/set";
 
@@ -44,12 +44,6 @@ export default function Log() {
       {sets.map((set) => {
         return <Set data={set} />;
       })}
-      <Pressable onPress={addSet}>
-        <Text style={styles.addExcerciseText}>Add Set</Text>
-      </Pressable>
-      <Pressable style={styles.addExcerciseButton} onPress={addExcercise}>
-        <Text style={styles.addExcerciseText}>Add Excercise</Text>
-      </Pressable>
     </View>
   );
 }
