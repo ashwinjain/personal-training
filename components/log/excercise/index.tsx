@@ -1,30 +1,16 @@
-import Dumbell from "@/assets/images/dumbell";
-import Chart from "@/assets/images/chart";
-import Section from "@/components/section";
-import { StyleSheet, View, Text, Pressable, TextInput } from "react-native";
-import styles from "./styles";
-import { useState } from "react";
 import Set from "@/components/log/set";
+import { useState } from "react";
+import { Pressable, Text, TextInput, View } from "react-native";
+import styles from "./styles";
 
-export interface SetType {
-  order: number;
-  type: "normal" | "drop" | "super";
-  reps: number;
-  weight: number;
-}
+import {
+  SetType,
+  ExcerciseType,
+  defaultSet,
+  defaultExcercise,
+} from "@/constants/types/types";
 
-const defaultSet: SetType = {
-  order: 1,
-  type: "normal",
-  reps: 0,
-  weight: 0,
-};
-
-function addExcercise() {
-  alert("add excercise pressed");
-}
-
-export default function Log() {
+export default function Excercise({ data }: { data: SetType[] }) {
   const [text, setText] = useState("");
   const handleChangeText = (input: string) => {
     setText(input);
@@ -42,8 +28,11 @@ export default function Log() {
         onChangeText={handleChangeText}
       />
       {sets.map((set) => {
-        return <Set data={set} />;
+        return <Set data={set} key={set.id} />;
       })}
+      <Pressable onPress={addSet}>
+        <Text style={styles.addExcerciseText}>Add Set</Text>
+      </Pressable>
     </View>
   );
 }

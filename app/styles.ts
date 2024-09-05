@@ -5,22 +5,33 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     height: "100%",
+    flexDirection: "column",
     // alignItems: "center",
   },
-  addExcerciseButton: {
+
+  actionButtons: {
     display: "flex",
-    width: "95%",
-    backgroundColor: "white",
+    flexDirection: "column",
     alignItems: "center",
-    borderRadius: 100,
+    position: "absolute",
+    bottom: 10,
+    width: "100%",
+    left: 50,
+    transform: "translateX(-50px)",
     shadowColor: "grey",
     shadowOffset: { width: 1, height: 5 },
     shadowOpacity: 0.4,
     shadowRadius: 3,
-    position: "absolute",
-    bottom: 0,
+    gap: 10,
   },
-  addExcerciseText: {
+  actionButton: {
+    backgroundColor: "white",
+    display: "flex",
+    width: "95%",
+    alignItems: "center",
+    borderRadius: 100,
+  },
+  buttonText: {
     color: COLORS.primary,
   },
 });
