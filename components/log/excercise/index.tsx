@@ -3,27 +3,21 @@ import { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 import styles from "./styles";
 
-import {
-  SetType,
-  ExcerciseType,
-  defaultSet,
-  defaultExcercise,
-} from "@/constants/types/types";
+import { ExerciseType, SetType, defaultSet } from "@/constants/types/types";
+import useSet from "@/constants/hooks/useSet";
 
-export default function Excercise({ data }: { data: SetType[] }) {
+export default function Excercise({ data }: { data: ExerciseType }) {
   const [text, setText] = useState("");
   const handleChangeText = (input: string) => {
     setText(input);
   };
 
-  const [sets, setSets] = useState<SetType[]>([]);
-  function addSet() {
-    setSets((prev) => [...prev, defaultSet]);
-  }
+  const { sets, addSet, updateSet } = useSet();
+
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Excercise"
+        placeholder="Exercise"
         value={text}
         onChangeText={handleChangeText}
       />
@@ -31,7 +25,7 @@ export default function Excercise({ data }: { data: SetType[] }) {
         return <Set data={set} key={set.id} />;
       })}
       <Pressable onPress={addSet}>
-        <Text style={styles.addExcerciseText}>Add Set</Text>
+        <Text style={styles.addExerciseText}>Add Set</Text>
       </Pressable>
     </View>
   );

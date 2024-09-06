@@ -4,7 +4,7 @@ export interface SetType {
   reps: number;
   weight: number;
 }
-export interface ExcerciseType {
+export interface ExerciseType {
   id: number;
   sets: SetType[];
 }
@@ -15,7 +15,7 @@ export const defaultSet: SetType = {
   reps: 0,
   weight: 0,
 };
-export const defaultExcercise: ExcerciseType = {
+export const defaultExercise: ExerciseType = {
   id: 1,
   sets: [defaultSet],
 };

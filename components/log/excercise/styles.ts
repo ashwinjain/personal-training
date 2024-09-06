@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {},
-  addExcerciseText: {
+  addExerciseText: {
     color: COLORS.primary,
   },
 });
