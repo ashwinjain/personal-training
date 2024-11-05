@@ -1,14 +1,10 @@
 import Excercise from "@/components/log/excercise";
-import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
-import styles from "../styles";
-import {
-  SetType,
-  ExerciseType,
-  defaultSet,
-  defaultExercise,
-} from "@/constants/types/types";
 import useExercise from "@/constants/hooks/useExercise";
+import { ExerciseType } from "@/constants/types/types";
+import { useState } from "react";
+import { Pressable, ScrollView, Text, View } from "react-native";
+import styles from "../styles";
+import { BlurView } from "expo-blur";
 
 export default function Log() {
   const [text, setText] = useState("");
@@ -20,14 +16,16 @@ export default function Log() {
   };
   return (
     <View style={styles.container}>
-      {exercises.map((exercise: ExerciseType) => {
-        return <Excercise key={exercise.id} data={exercise} />;
-      })}
-      <View style={styles.actionButtons}>
+      <ScrollView>
+        {exercises.map((exercise: ExerciseType) => {
+          return <Excercise key={exercise.id} />;
+        })}
+      </ScrollView>
+      <View style={styles.actionButtonContainer}>
         <Pressable style={styles.actionButton} onPress={addExercise}>
           <Text style={styles.buttonText}>Add Excercise</Text>
         </Pressable>
-        <Pressable style={styles.actionButton} onPress={addExercise}>
+        <Pressable style={styles.actionButton}>
           <Text style={styles.buttonText}>Submit</Text>
         </Pressable>
       </View>

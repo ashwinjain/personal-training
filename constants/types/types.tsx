@@ -9,6 +9,10 @@ export interface ExerciseType {
   sets: SetType[];
 }
 
+export interface WorkoutData {
+  excercises: ExerciseType[];
+}
+
 export const defaultSet: SetType = {
   id: 1,
   type: "normal",

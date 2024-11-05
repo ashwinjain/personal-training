@@ -6,22 +6,13 @@ const styles = StyleSheet.create({
     display: "flex",
     height: "100%",
     flexDirection: "column",
-    // alignItems: "center",
+    justifyContent: "center",
   },
-
-  actionButtons: {
+  actionButtonContainer: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    position: "absolute",
-    bottom: 10,
-    width: "100%",
-    left: 50,
-    transform: "translateX(-50px)",
-    shadowColor: "grey",
-    shadowOffset: { width: 1, height: 5 },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
+    marginVertical: 10,
     gap: 10,
   },
   actionButton: {
@@ -30,6 +21,8 @@ const styles = StyleSheet.create({
     width: "95%",
     alignItems: "center",
     borderRadius: 100,
+    height: 40,
+    justifyContent: "center",
   },
   buttonText: {
     color: COLORS.primary,
