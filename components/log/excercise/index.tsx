@@ -1,49 +1,41 @@
-import Dumbell from "@/assets/images/dumbell";
-import Chart from "@/assets/images/chart";
-import Section from "@/components/section";
-import { StyleSheet, View, Text, Pressable, TextInput } from "react-native";
-import styles from "./styles";
-import { useState } from "react";
 import Set from "@/components/log/set";
+import { useState } from "react";
+import { Pressable, Text, TextInput, View } from "react-native";
+import styles from "./styles";
 
-export interface SetType {
-  order: number;
-  type: "normal" | "drop" | "super";
-  reps: number;
-  weight: number;
-}
+import { ExerciseType, SetType, defaultSet } from "@/constants/types/types";
+import useSet from "@/constants/hooks/useSet";
 
-const defaultSet: SetType = {
-  order: 1,
-  type: "normal",
-  reps: 0,
-  weight: 0,
-};
-
-function addExcercise() {
-  alert("add excercise pressed");
-}
-
-export default function Log() {
+export default function Excercise() {
   const [text, setText] = useState("");
   const handleChangeText = (input: string) => {
     setText(input);
   };
 
-  const [sets, setSets] = useState<SetType[]>([]);
-  function addSet() {
-    setSets((prev) => [...prev, defaultSet]);
-  }
+  const { sets, addSet, updateSet } = useSet();
+
+  const onExcerciseSubmit = () => {};
+
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Excercise"
+        placeholder="Enter excercise name"
         value={text}
         onChangeText={handleChangeText}
+        style={styles.textInput}
+        onSubmitEditing={() => alert("hello")}
       />
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Set</Text>
+        <Text style={styles.header}>Weight</Text>
+        <Text style={styles.header}>Reps</Text>
+      </View>
       {sets.map((set) => {
-        return <Set data={set} />;
+        return <Set data={set} key={set.id} />;
       })}
+      <Pressable onPress={addSet} style={styles.button}>
+        <Text style={styles.addExerciseText}>Add Set</Text>
+      </Pressable>
     </View>
   );
 }

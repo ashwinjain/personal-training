@@ -1,55 +1,34 @@
-import Dumbell from "@/assets/images/dumbell";
-import Chart from "@/assets/images/chart";
-import Section from "@/components/section";
-import { StyleSheet, View, Text, Pressable, TextInput } from "react-native";
-import styles from "../styles";
+import Excercise from "@/components/log/excercise";
+import useExercise from "@/constants/hooks/useExercise";
+import { ExerciseType } from "@/constants/types/types";
 import { useState } from "react";
-import Set from "@/components/log/set";
-
-export interface SetType {
-  order: number;
-  type: "normal" | "drop" | "super";
-  reps: number;
-  weight: number;
-}
-
-const defaultSet: SetType = {
-  order: 1,
-  type: "normal",
-  reps: 0,
-  weight: 0,
-};
-
-function addExcercise() {
-  alert("add excercise pressed");
-}
+import { Pressable, ScrollView, Text, View } from "react-native";
+import styles from "../styles";
+import { BlurView } from "expo-blur";
 
 export default function Log() {
   const [text, setText] = useState("");
+  const { exercises, addExercise, updateExercise } = useExercise();
+  const sets = useExercise();
+
   const handleChangeText = (input: string) => {
     setText(input);
   };
-
-  const [sets, setSets] = useState<SetType[]>([]);
-  function addSet() {
-    setSets((prev) => [...prev, defaultSet]);
-  }
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder="Excercise"
-        value={text}
-        onChangeText={handleChangeText}
-      />
-      {sets.map((set) => {
-        return <Set data={set} />;
-      })}
-      <Pressable onPress={addSet}>
-        <Text style={styles.addExcerciseText}>Add Set</Text>
-      </Pressable>
-      <Pressable style={styles.addExcerciseButton} onPress={addExcercise}>
-        <Text style={styles.addExcerciseText}>Add Excercise</Text>
-      </Pressable>
+      <ScrollView>
+        {exercises.map((exercise: ExerciseType) => {
+          return <Excercise key={exercise.id} />;
+        })}
+      </ScrollView>
+      <View style={styles.actionButtonContainer}>
+        <Pressable style={styles.actionButton} onPress={addExercise}>
+          <Text style={styles.buttonText}>Add Excercise</Text>
+        </Pressable>
+        <Pressable style={styles.actionButton}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }

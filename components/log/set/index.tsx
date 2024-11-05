@@ -1,7 +1,7 @@
 import { View, Text, TextInput, Pressable } from "react-native";
 import styles from "./styles";
-import { SetType } from "@/app/(tabs)/log";
 import { useState } from "react";
+import { SetType } from "@/constants/types/types";
 
 export default function Set({ data }: { data: SetType }) {
   const [weight, setWeight] = useState("");
@@ -15,15 +15,17 @@ export default function Set({ data }: { data: SetType }) {
   }
 
   return (
-    <View style={styles.container} id={`${data.order}`}>
-      <Text>{data.order}</Text>
+    <View style={styles.container} id={`${data.id}`}>
+      <Text>{data.id}</Text>
       <TextInput
-        placeholder="Weight"
+        style={styles.textInput}
         value={weight}
         onChangeText={handleWeightChange}
+        keyboardType="numeric"
+        returnKeyType="done"
       />
       <TextInput
-        placeholder="Reps"
+        style={styles.textInput}
         value={reps}
         onChangeText={handleRepsChange}
       />

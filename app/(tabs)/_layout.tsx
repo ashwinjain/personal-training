@@ -23,6 +23,14 @@ export default function TabLayout() {
         headerShown: useClientOnlyValue(false, true),
       }}
     >
+      {/* <Tabs.Screen
+        name="index"
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          headerShown: false,
+          title: "Home",
+        }}
+      /> */}
       <Tabs.Screen
         name="log"
         options={{
@@ -30,14 +38,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
           headerShown: false,
           title: "Log",
-        }}
-      />
-      <Tabs.Screen
-        name="index"
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerShown: false,
-          title: "Home",
         }}
       />
     </Tabs>

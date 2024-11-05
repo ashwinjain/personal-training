@@ -3,11 +3,19 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: "Commissioner",
     display: "flex",
-    backgroundColor: "lightblue",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
+    paddingVertical: 6,
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "lightgrey",
+    borderRadius: 10,
+    padding: 5,
+    width: 40,
+    height: 25,
   },
 });
 
