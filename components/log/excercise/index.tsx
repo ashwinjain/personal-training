@@ -3,10 +3,16 @@ import { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 import styles from "./styles";
 
-import { ExerciseType, SetType, defaultSet } from "@/constants/types/types";
 import useSet from "@/constants/hooks/useSet";
+import React, { useEffect } from "react";
 
-export default function Excercise() {
+import { ExerciseType } from "@/constants/types/types";
+
+type ExerciseProps = {
+  exercise: ExerciseType;
+  updateExercise: (exercise: ExerciseType) => void;
+};
+export default function Exercise({ exercise, updateExercise }: ExerciseProps) {
   const [text, setText] = useState("");
   const handleChangeText = (input: string) => {
     setText(input);
@@ -14,7 +20,10 @@ export default function Excercise() {
 
   const { sets, addSet, updateSet } = useSet();
 
-  const onExcerciseSubmit = () => {};
+  useEffect(() => {
+    const newExercise = { id: exercise.id, sets: sets };
+    updateExercise(newExercise);
+  }, [sets]); // dependencies control when the effect runs
 
   return (
     <View style={styles.container}>
@@ -31,7 +40,7 @@ export default function Excercise() {
         <Text style={styles.header}>Reps</Text>
       </View>
       {sets.map((set) => {
-        return <Set data={set} key={set.id} />;
+        return <Set data={set} updateSet={updateSet} key={set.id} />;
       })}
       <Pressable onPress={addSet} style={styles.button}>
         <Text style={styles.addExerciseText}>Add Set</Text>
