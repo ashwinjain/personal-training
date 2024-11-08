@@ -13,26 +13,26 @@ type ExerciseProps = {
   updateExercise: (exercise: ExerciseType) => void;
 };
 export default function Exercise({ exercise, updateExercise }: ExerciseProps) {
-  const [text, setText] = useState("");
-  const handleChangeText = (input: string) => {
-    setText(input);
+  const [exerciseName, setExerciseName] = useState("");
+  const handleChangeName = (input: string) => {
+    setExerciseName(input);
   };
 
   const { sets, addSet, updateSet } = useSet();
 
   useEffect(() => {
-    const newExercise = { id: exercise.id, sets: sets };
+    const newExercise = { id: exercise.id, name: exerciseName, sets: sets };
+    console.log(newExercise);
     updateExercise(newExercise);
-  }, [sets]); // dependencies control when the effect runs
+  }, [sets, exerciseName]); // dependencies control when the effect runs
 
   return (
     <View style={styles.container}>
       <TextInput
         placeholder="Enter excercise name"
-        value={text}
-        onChangeText={handleChangeText}
+        value={exerciseName}
+        onChangeText={handleChangeName}
         style={styles.textInput}
-        onSubmitEditing={() => alert("hello")}
       />
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Set</Text>

@@ -1,6 +1,6 @@
 import { View, Text, TextInput, Pressable } from "react-native";
 import styles from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ExerciseType, SetType } from "@/constants/types/types";
 
 type SetT = {
@@ -12,7 +12,7 @@ export default function Set({ data, updateSet }: SetT) {
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
 
-  function updateSetLocal() {
+  useEffect(() => {
     const newSet: SetType = {
       id: data.id,
       type: data.type,
@@ -20,7 +20,7 @@ export default function Set({ data, updateSet }: SetT) {
       weight: Number(weight),
     };
     updateSet(newSet);
-  }
+  }, [weight, reps]);
 
   return (
     <View style={styles.container} id={`${data.id}`}>
@@ -33,7 +33,6 @@ export default function Set({ data, updateSet }: SetT) {
         }}
         keyboardType="numeric"
         returnKeyType="done"
-        onSubmitEditing={updateSetLocal}
       />
       <TextInput
         style={styles.textInput}
@@ -41,7 +40,6 @@ export default function Set({ data, updateSet }: SetT) {
         onChangeText={(text) => setReps(text)}
         keyboardType="numeric"
         returnKeyType="done"
-        onSubmitEditing={updateSetLocal}
       />
     </View>
   );
