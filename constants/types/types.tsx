@@ -6,11 +6,12 @@ export interface SetType {
 }
 export interface ExerciseType {
   id: number;
+  name: string;
   sets: SetType[];
 }
 
-export interface WorkoutData {
-  excercises: ExerciseType[];
+export interface WorkoutType {
+  exercises: ExerciseType[];
 }
 
 export const defaultSet: SetType = {
@@ -21,5 +22,6 @@ export const defaultSet: SetType = {
 };
 export const defaultExercise: ExerciseType = {
   id: 1,
+  name: "",
   sets: [defaultSet],
 };

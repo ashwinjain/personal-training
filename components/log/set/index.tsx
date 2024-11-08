@@ -1,18 +1,26 @@
 import { View, Text, TextInput, Pressable } from "react-native";
 import styles from "./styles";
-import { useState } from "react";
-import { SetType } from "@/constants/types/types";
+import { useEffect, useState } from "react";
+import { ExerciseType, SetType } from "@/constants/types/types";
 
-export default function Set({ data }: { data: SetType }) {
+type SetT = {
+  data: SetType;
+  updateSet: (set: SetType) => void;
+};
+
+export default function Set({ data, updateSet }: SetT) {
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
 
-  function handleWeightChange(weight: string) {
-    setWeight(weight);
-  }
-  function handleRepsChange(reps: string) {
-    setReps(reps);
-  }
+  useEffect(() => {
+    const newSet: SetType = {
+      id: data.id,
+      type: data.type,
+      reps: Number(reps),
+      weight: Number(weight),
+    };
+    updateSet(newSet);
+  }, [weight, reps]);
 
   return (
     <View style={styles.container} id={`${data.id}`}>
@@ -20,14 +28,18 @@ export default function Set({ data }: { data: SetType }) {
       <TextInput
         style={styles.textInput}
         value={weight}
-        onChangeText={handleWeightChange}
+        onChangeText={(text) => {
+          setWeight(text);
+        }}
         keyboardType="numeric"
         returnKeyType="done"
       />
       <TextInput
         style={styles.textInput}
         value={reps}
-        onChangeText={handleRepsChange}
+        onChangeText={(text) => setReps(text)}
+        keyboardType="numeric"
+        returnKeyType="done"
       />
     </View>
   );
