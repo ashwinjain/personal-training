@@ -4,8 +4,11 @@ import { ExerciseType, WorkoutType } from "@/constants/types/types";
 import { useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import styles from "../styles";
+import { DatabaseAPI } from "../backend/database/api";
 
 export default function Log() {
+  // TODO: hardcoded, change this to current user
+  const USERNAME = "ashwin";
   const [text, setText] = useState("");
   const { exercises, addExercise, updateExercise } = useExercise();
   const [workout, setWorkout] = useState<WorkoutType>({ exercises: [] });
@@ -20,6 +23,8 @@ export default function Log() {
   };
 
   const onExcerciseSubmit = () => {
+    const db = new DatabaseAPI();
+    db.uploadWorkout(USERNAME, exercises[0]);
     alert("updating gcp data");
   };
 
