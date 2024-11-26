@@ -2,6 +2,7 @@ import { getFirestore, setDoc, doc, Firestore } from "firebase/firestore";
 
 import { app } from "../firebase";
 import { ExerciseType } from "@/constants/types/types";
+import { WorkoutDoc } from "./types";
 
 export class DatabaseAPI {
   firestoreDB: Firestore;
@@ -11,7 +12,7 @@ export class DatabaseAPI {
 
   public async uploadWorkout(
     username: string,
-    data: ExerciseType
+    data: WorkoutDoc
   ): Promise<void> {
     try {
       // Reference to the workout document in Firestore

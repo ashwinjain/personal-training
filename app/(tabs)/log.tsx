@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import styles from "../styles";
 import { DatabaseAPI } from "../backend/database/api";
+import { WorkoutDoc } from "../backend/database/types";
+
+import Start from "../../components/start";
 
 export default function Log() {
   // TODO: hardcoded, change this to current user
@@ -24,10 +27,26 @@ export default function Log() {
 
   const onExcerciseSubmit = () => {
     const db = new DatabaseAPI();
-    db.uploadWorkout(USERNAME, exercises[0]);
+    // create a new object
+    /*
+
+    {
+      exercises: Exercise[]
+      starttime: datetime
+      endtime: datetime
+    }
+    */
+
+    const workoutData: WorkoutDoc = {
+      exercises: exercises,
+      starttime: "9",
+      endtime: "10",
+    };
+    db.uploadWorkout(USERNAME, workoutData);
     alert("updating gcp data");
   };
 
+  return <Start></Start>;
   return (
     <View style={styles.container}>
       <ScrollView>

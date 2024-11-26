@@ -6,6 +6,7 @@ export default function useExercise() {
 
   function addExercise() {
     const newExercise: ExerciseType = {
+      name: "",
       id: exercises[exercises.length - 1].id + 1,
       sets: [],
     };
@@ -18,6 +19,7 @@ export default function useExercise() {
         if (current.id === exercise.id) {
           return {
             ...current,
+            name: exercise.name,
             sets: exercise.sets,
           };
         }
