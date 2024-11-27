@@ -21,8 +21,6 @@ export default function Exercise({ exercise, updateExercise }: ExerciseProps) {
   const { sets, addSet, updateSet } = useSet();
 
   useEffect(() => {
-    console.log(exerciseName);
-
     const newExercise = { id: exercise.id, name: exerciseName, sets: sets };
     updateExercise(newExercise);
   }, [sets, exerciseName]); // dependencies control when the effect runs
