@@ -1,68 +1,24 @@
 import Exercise from "@/components/log/excercise";
 import useExercise from "@/constants/hooks/useExercise";
-import { ExerciseType, WorkoutType } from "@/constants/types/types";
-import { useEffect, useState } from "react";
+import { ExerciseType } from "@/constants/types/types";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { DatabaseAPI } from "../backend/database/api";
 import styles from "../styles";
 
+import useWorkout from "@/constants/hooks/useWorkout";
 import Start from "../../components/start";
+import { useEffect } from "react";
 
 export default function Log() {
-  // TODO: hardcoded, change this to current user
-  const USERNAME = "ashwin";
-  const [started, setStarted] = useState(false);
+  // state variables
+  const { workout, startWorkout, finishWorkout, updateWorkout } = useWorkout();
   const { exercises, addExercise, updateExercise } = useExercise();
-  const [startTime, setStartTime] = useState(-1);
-  const [endTime, setEndTime] = useState(-1);
-  const [workout, setWorkout] = useState<WorkoutType>({
-    startTime: startTime,
-    endTime: endTime,
-    exercises: [],
-  });
 
   useEffect(() => {
-    const newWorkout = {
-      startTime: startTime,
-      endTime: endTime,
-      exercises: exercises,
-    };
-    setWorkout(newWorkout);
-  }, [startTime, exercises]); // dependencies control when the effect runs
-
-  useEffect(() => {
-    const newWorkout = {
-      startTime: startTime,
-      endTime: endTime,
-      exercises: exercises,
-    };
-    setWorkout(newWorkout);
-    updateWorkout();
-  }, [endTime]);
-
-  function updateWorkout() {
-    const db = new DatabaseAPI();
-    db.uploadWorkout(USERNAME, workout);
-  }
-  const onExerciseSubmit = () => {
-    updateWorkout();
-  };
-
-  function startWorkout() {
-    const unixTimeSeconds = Math.floor(Date.now() / 1000);
-    setStartTime(unixTimeSeconds);
-    setStarted(true);
-    updateWorkout();
-  }
-  function finishWorkout() {
-    const unixTimeSeconds = Math.floor(Date.now() / 1000);
-    setEndTime(unixTimeSeconds);
-    setStarted(false);
-  }
-
+    updateWorkout(exercises);
+  }, [exercises]);
   return (
     <>
-      {started ? (
+      {workout.startTime != null ? (
         <View style={styles.container}>
           <ScrollView contentContainerStyle={styles.scrollContainer}>
             {workout.exercises.map((exercise: ExerciseType) => (
@@ -77,7 +33,10 @@ export default function Log() {
             </Pressable>
           </ScrollView>
           <View style={styles.actionButtonContainer}>
-            <Pressable style={styles.actionButton} onPress={onExerciseSubmit}>
+            <Pressable
+              style={styles.actionButton}
+              onPress={() => updateWorkout(exercises)}
+            >
               <Text style={styles.buttonText}>Submit</Text>
             </Pressable>
             <Pressable style={styles.actionButton} onPress={finishWorkout}>

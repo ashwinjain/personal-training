@@ -11,8 +11,8 @@ export interface ExerciseType {
 }
 
 export interface WorkoutType {
-  startTime: number;
-  endTime: number;
+  startTime: number | null;
+  endTime: number | null;
   exercises: ExerciseType[];
 }
 
