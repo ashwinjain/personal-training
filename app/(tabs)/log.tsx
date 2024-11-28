@@ -14,7 +14,7 @@ export default function Log() {
   const [started, setStarted] = useState(false);
   const { exercises, addExercise, updateExercise } = useExercise();
   const [startTime, setStartTime] = useState(-1);
-  const [endTime, setEndTIme] = useState(-1);
+  const [endTime, setEndTime] = useState(-1);
   const [workout, setWorkout] = useState<WorkoutType>({
     startTime: startTime,
     endTime: endTime,
@@ -28,35 +28,43 @@ export default function Log() {
       exercises: exercises,
     };
     setWorkout(newWorkout);
-  }, [startTime, endTime, exercises]); // dependencies control when the effect runs
+  }, [startTime, exercises]); // dependencies control when the effect runs
 
-  const onExerciseSubmit = () => {
+  useEffect(() => {
+    const newWorkout = {
+      startTime: startTime,
+      endTime: endTime,
+      exercises: exercises,
+    };
+    setWorkout(newWorkout);
+    updateWorkout();
+  }, [endTime]);
+
+  function updateWorkout() {
     const db = new DatabaseAPI();
-    // create a new object
-    /*
-
-    {
-      exercises: Exercise[]
-      starttime: datetime
-      endtime: datetime
-    }
-    */
-
     db.uploadWorkout(USERNAME, workout);
-    alert("updating gcp data");
+  }
+  const onExerciseSubmit = () => {
+    updateWorkout();
   };
 
   function startWorkout() {
     const unixTimeSeconds = Math.floor(Date.now() / 1000);
     setStartTime(unixTimeSeconds);
     setStarted(true);
+    updateWorkout();
+  }
+  function finishWorkout() {
+    const unixTimeSeconds = Math.floor(Date.now() / 1000);
+    setEndTime(unixTimeSeconds);
+    setStarted(false);
   }
 
   return (
     <>
       {started ? (
         <View style={styles.container}>
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.scrollContainer}>
             {workout.exercises.map((exercise: ExerciseType) => (
               <Exercise
                 exercise={exercise}
@@ -64,13 +72,16 @@ export default function Log() {
                 key={exercise.id}
               />
             ))}
+            <Pressable style={styles.addButton} onPress={addExercise}>
+              <Text style={styles.buttonText}>+</Text>
+            </Pressable>
           </ScrollView>
           <View style={styles.actionButtonContainer}>
-            <Pressable style={styles.actionButton} onPress={addExercise}>
-              <Text style={styles.buttonText}>Add Exercise</Text>
-            </Pressable>
             <Pressable style={styles.actionButton} onPress={onExerciseSubmit}>
               <Text style={styles.buttonText}>Submit</Text>
+            </Pressable>
+            <Pressable style={styles.actionButton} onPress={finishWorkout}>
+              <Text style={styles.buttonText}>Finish Workout</Text>
             </Pressable>
           </View>
         </View>

@@ -1,15 +1,7 @@
-import {
-  getFirestore,
-  setDoc,
-  doc,
-  Firestore,
-  collection,
-  addDoc,
-} from "firebase/firestore";
+import { doc, Firestore, getFirestore, setDoc } from "firebase/firestore";
 
+import { WorkoutType } from "@/constants/types/types";
 import { app } from "../firebase";
-import { ExerciseType, WorkoutType } from "@/constants/types/types";
-import { WorkoutDoc } from "./types";
 
 export class DatabaseAPI {
   firestoreDB: Firestore;
@@ -36,14 +28,5 @@ export class DatabaseAPI {
       console.error("Error uploading workout:", error);
       throw error; // Re-throw error for the caller to handle
     }
-  }
-
-  private getDate(): string {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
-    const day = String(currentDate.getDate()).padStart(2, "0");
-
-    return `${year}${month}${day}`; // Example: 2024-11-21
   }
 }

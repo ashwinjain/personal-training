@@ -8,12 +8,12 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 15,
     padding: 20,
+    width: "90%",
   },
   headerContainer: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    // marginHorizontal: 20,
     marginTop: 15,
   },
   header: {
