@@ -5,8 +5,8 @@ import { Pressable, ScrollView, Text, View } from "react-native";
 import styles from "../styles";
 
 import useWorkout from "@/constants/hooks/useWorkout";
-import Start from "../../components/start";
 import { useEffect } from "react";
+import Start from "../../components/start";
 
 export default function Log() {
   // state variables
@@ -53,7 +53,11 @@ export default function Log() {
           </View>
         </View>
       ) : (
-        <Start onPress={startWorkout} />
+        <View>
+          <Start onPress={() => startWorkout("ashwin")} name={"Ashwin"} />
+          <Start onPress={() => startWorkout("anshu")} name={"Anshu"} />
+          <Start onPress={() => startWorkout("sudhit")} name={"Sudhit"} />
+        </View>
       )}
     </>
   );

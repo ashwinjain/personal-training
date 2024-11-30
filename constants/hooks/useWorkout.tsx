@@ -9,20 +9,23 @@ export default function useWorkout() {
     exercises: [],
   });
 
+  const [username, setUsername] = useState("");
+
   const getUnixTime = () => Math.floor(Date.now() / 1000);
 
   useEffect(() => {
     if (workout.endTime) {
-      db.uploadWorkout("ashwin", workout);
+      db.uploadWorkout(username, workout);
       setWorkout(defaultWorkout);
     }
   }, [workout.endTime]);
 
-  const startWorkout = () => {
+  const startWorkout = (name: string) => {
     setWorkout((prev) => ({
       ...prev,
       startTime: getUnixTime(),
     }));
+    setUsername(name);
   };
 
   const finishWorkout = () => {
