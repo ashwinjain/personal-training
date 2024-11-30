@@ -5,7 +5,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
-import "react-native-reanimated";
+// import "react-native-reanimated";
 import styles from "./layout-styles";
 
 export {
@@ -41,7 +41,6 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-
   return <RootLayoutNav />;
 }
 function Header() {

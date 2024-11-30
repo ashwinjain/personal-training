@@ -1,34 +1,24 @@
 import { useState } from "react";
-import {
-  defaultExercise,
-  defaultSet,
-  ExerciseType,
-  SetType,
-} from "../types/types";
+import { defaultSet, SetType } from "../types/types";
 
 export default function useSet() {
   const [sets, setSets] = useState<SetType[]>([defaultSet]);
 
   function addSet() {
     const newSet: SetType = {
-      id: sets[sets.length - 1].id + 1,
+      id: sets[sets.length - 1]?.id + 1 || 1, // Safe handling if no sets exist
       reps: 0,
       type: "normal",
       weight: 0,
     };
-    setSets([...sets, newSet]);
+    setSets((prevSets) => [...prevSets, newSet]);
   }
 
-  function updateSet(set: SetType) {
-    setSets(
-      sets.map((current) => {
-        if (current.id === set.id) {
-          return {
-            ...set,
-          };
-        }
-        return current;
-      })
+  function updateSet(updatedSet: SetType) {
+    setSets((prevSets) =>
+      prevSets.map((current) =>
+        current.id === updatedSet.id ? { ...updatedSet } : current
+      )
     );
   }
 

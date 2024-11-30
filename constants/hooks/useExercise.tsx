@@ -1,30 +1,31 @@
 import { useState } from "react";
-import { defaultExercise, ExerciseType, SetType } from "../types/types";
+import { defaultExercise, ExerciseType } from "../types/types";
 
 export default function useExercise() {
   const [exercises, setExercises] = useState<ExerciseType[]>([defaultExercise]);
 
   function addExercise() {
     const newExercise: ExerciseType = {
-      id: exercises[exercises.length - 1].id + 1,
+      name: "",
+      id: exercises[exercises.length - 1]?.id + 1 || 1, // Safe handling if no exercises exist
       sets: [],
     };
-    setExercises([...exercises, newExercise]);
+    setExercises((prevExercises) => [...prevExercises, newExercise]);
   }
 
-  function updateExercise(exercise: ExerciseType) {
-    setExercises(
-      exercises.map((current) => {
-        if (current.id === exercise.id) {
-          return {
-            ...current,
-            sets: exercise.sets,
-          };
-        }
-        return current;
-      })
+  function updateExercise(updatedExercise: ExerciseType) {
+    setExercises((prevExercises) =>
+      prevExercises.map((current) =>
+        current.id === updatedExercise.id
+          ? {
+              ...current,
+              name: updatedExercise.name,
+              sets: updatedExercise.sets,
+            }
+          : current
+      )
     );
   }
 
-  return { exercises, addExercise, updateExercise };
+  return { exercises, setExercises, addExercise, updateExercise };
 }

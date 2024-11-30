@@ -1,45 +1,44 @@
-import { View, Text, TextInput, Pressable } from "react-native";
-import styles from "./styles";
+import { View, Text, TextInput } from "react-native";
 import { useEffect, useState } from "react";
+import styles from "./styles";
 import { ExerciseType, SetType } from "@/constants/types/types";
 
-type SetT = {
+type SetProps = {
   data: SetType;
   updateSet: (set: SetType) => void;
 };
 
-export default function Set({ data, updateSet }: SetT) {
+export default function Set({ data, updateSet }: SetProps) {
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
 
   useEffect(() => {
-    const newSet: SetType = {
-      id: data.id,
-      type: data.type,
-      reps: Number(reps),
-      weight: Number(weight),
+    const updatedSet: SetType = {
+      ...data,
+      weight: Number(weight) || 0,
+      reps: Number(reps) || 0,
     };
-    updateSet(newSet);
+    updateSet(updatedSet);
   }, [weight, reps]);
 
   return (
-    <View style={styles.container} id={`${data.id}`}>
+    <View style={styles.container}>
       <Text>{data.id}</Text>
       <TextInput
         style={styles.textInput}
         value={weight}
-        onChangeText={(text) => {
-          setWeight(text);
-        }}
+        onChangeText={setWeight} // Directly pass state updater
         keyboardType="numeric"
         returnKeyType="done"
+        placeholder="Weight"
       />
       <TextInput
         style={styles.textInput}
         value={reps}
-        onChangeText={(text) => setReps(text)}
+        onChangeText={setReps} // Directly pass state updater
         keyboardType="numeric"
         returnKeyType="done"
+        placeholder="Reps"
       />
     </View>
   );

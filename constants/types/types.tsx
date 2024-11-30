@@ -4,6 +4,7 @@ export interface SetType {
   reps: number;
   weight: number;
 }
+
 export interface ExerciseType {
   id: number;
   name: string;
@@ -11,6 +12,8 @@ export interface ExerciseType {
 }
 
 export interface WorkoutType {
+  startTime: number | null;
+  endTime: number | null;
   exercises: ExerciseType[];
 }
 
@@ -20,8 +23,14 @@ export const defaultSet: SetType = {
   reps: 0,
   weight: 0,
 };
+
 export const defaultExercise: ExerciseType = {
   id: 1,
   name: "",
   sets: [defaultSet],
+};
+export const defaultWorkout: WorkoutType = {
+  startTime: null,
+  endTime: null,
+  exercises: [defaultExercise],
 };

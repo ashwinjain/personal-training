@@ -1,19 +1,18 @@
-import COLORS from "@/constants/Colors";
 import { StyleSheet } from "react-native";
+import COLORS from "@/constants/Colors";
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    display: "flex",
+    flex: 1,
     margin: 10,
     borderRadius: 15,
     padding: 20,
+    width: "90%",
   },
   headerContainer: {
-    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    // marginHorizontal: 20,
     marginTop: 15,
   },
   header: {
@@ -22,13 +21,14 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 20,
+    color: "black",
   },
   addExerciseText: {
     color: COLORS.primary,
+    fontWeight: "bold",
   },
   button: {
-    width: "auto",
-    marginRight: "auto",
+    alignSelf: "flex-start",
     marginTop: 10,
   },
 });
