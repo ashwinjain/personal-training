@@ -1,6 +1,6 @@
 import Exercise from "@/components/log/excercise";
 import useExercise from "@/constants/hooks/useExercise";
-import { ExerciseType } from "@/constants/types/types";
+import { defaultExercise, ExerciseType } from "@/constants/types/types";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import styles from "../styles";
 
@@ -11,11 +11,19 @@ import { useEffect } from "react";
 export default function Log() {
   // state variables
   const { workout, startWorkout, finishWorkout, updateWorkout } = useWorkout();
-  const { exercises, addExercise, updateExercise } = useExercise();
+  const { exercises, setExercises, addExercise, updateExercise } =
+    useExercise();
 
   useEffect(() => {
     updateWorkout(exercises);
   }, [exercises]);
+
+  useEffect(() => {
+    if (workout.endTime == null) {
+      setExercises([defaultExercise]);
+    }
+  }, [workout.endTime]);
+
   return (
     <>
       {workout.startTime != null ? (

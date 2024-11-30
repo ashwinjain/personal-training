@@ -14,7 +14,7 @@ export class DatabaseAPI {
     data: WorkoutType
   ): Promise<void> {
     try {
-      const workoutId = data.startTime;
+      const workoutId = data.startTime!;
       const today = new Date();
       const dateString = today.toISOString().split("T")[0]; // 'YYYY-MM-DD'
       const dailyDocRef = doc(

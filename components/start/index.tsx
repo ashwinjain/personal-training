@@ -7,7 +7,7 @@ export default function Start({ onPress }: { onPress: () => void }) {
     <View>
       <TouchableOpacity style={styles.actionButtonContainer} onPress={onPress}>
         <View style={styles.actionButton}>
-          <Text>Start Workout</Text>
+          <Text style={styles.actionButtonText}>Start Workout</Text>
         </View>
       </TouchableOpacity>
     </View>
